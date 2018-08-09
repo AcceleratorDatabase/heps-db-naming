@@ -5,13 +5,10 @@
  */
 package heps.db.naming.api;
 
+import heps.db.naming.comman.tools.EmProvider;
 import heps.db.naming.entity.Subsystem;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 /**
@@ -20,11 +17,12 @@ import javax.persistence.Query;
  */
 public class SubsystemAPI {
 
-    @PersistenceUnit
+   /* @PersistenceUnit
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("accNamingPU");
     static EntityManager em = emf.createEntityManager();
 
-    @PersistenceContext
+    @PersistenceContext*/
+    public static EntityManager em = EmProvider.getInstance().getEntityManagerFactory().createEntityManager();
 
     public Subsystem findBySubsystemName(String subsystem_name) {
         Query q;
@@ -58,5 +56,11 @@ public class SubsystemAPI {
         } finally {
             em.close();
         } */
+    }
+    
+     public List<Subsystem> getAllSubsystem(){
+        Query q;
+        q=em.createNamedQuery("Subsystem.findAll");
+        return q.getResultList();
     }
 }

@@ -5,13 +5,11 @@
  */
 package heps.db.naming.api;
 
+import heps.db.naming.comman.tools.EmProvider;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
+import heps.db.naming.entity.System;
 
 /**
  *
@@ -19,11 +17,12 @@ import javax.persistence.Query;
  */
 public class SystemAPI {
 
-    @PersistenceUnit
+    /*@PersistenceUnit
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("accNamingPU");
     static EntityManager em = emf.createEntityManager();
 
-    @PersistenceContext
+    @PersistenceContext*/
+    public static EntityManager em = EmProvider.getInstance().getEntityManagerFactory().createEntityManager();
 
     public heps.db.naming.entity.System findBySystemName(String systemName) {
         Query q;
@@ -45,7 +44,7 @@ public class SystemAPI {
             em.persist(s);
             em.getTransaction().commit();
         } else {
-            System.out.println("The System " + system_name + " is already existing in the database");
+            java.lang.System.out.println("The System " + system_name + " is already existing in the database");
         }
         /*try {          
             em.getTransaction().begin();
@@ -59,4 +58,9 @@ public class SystemAPI {
         }  */
     }
 
+     public List<System> getAllSystem(){
+        Query q;
+        q=em.createNamedQuery("System.findAll");
+        return q.getResultList();
+    }
 }

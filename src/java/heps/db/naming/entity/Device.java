@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "device")
@@ -59,7 +59,7 @@ public class Device implements Serializable {
     @ManyToOne(optional = false)
     private System system;
     @OneToMany(mappedBy = "device")
-    private List<Signal> signalList;
+    private List<TSignal> tSignalList;
 
     public Device() {
     }
@@ -117,12 +117,12 @@ public class Device implements Serializable {
     }
 
     @XmlTransient
-    public List<Signal> getSignalList() {
-        return signalList;
+    public List<TSignal> getTSignalList() {
+        return tSignalList;
     }
 
-    public void setSignalList(List<Signal> signalList) {
-        this.signalList = signalList;
+    public void setTSignalList(List<TSignal> tSignalList) {
+        this.tSignalList = tSignalList;
     }
 
     @Override

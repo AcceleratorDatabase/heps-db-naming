@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Signal</title>
+    </h:head>
+    <h:body>
+        <h:form  style="margin-top:50px;margin-left:50px;margin-right:50px">
+            <p:link value="Back" outcome="index" style="font-size:20px" />
+            &nbsp;&nbsp;
+            <p:link value="Device Table" outcome="device" style="font-size:20px" />
+            <p:dataTable var="signal" 
+                         value="#{tSignalService.TSignalList}"                                    
+                         sortMode="multiple">
+                <f:facet name="header">
+                    <p style="font-size: 20px;color: cornflowerblue"> Signal Table</p>
+                </f:facet>
+                <p:column headerText="Signal Name"
+                          sortBy="#{signal.signalName}"
+                          filterBy="#{signal.signalName}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{signal.signalName}"/>     
+                </p:column>
+                <p:column headerText="Device"
+                          sortBy="#{signal.device.qualifier}"
+                          filterBy="#{signal.device.qualifier}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{signal.device.qualifier}"/>     
+                </p:column>
+                <p:column headerText="Signal Type"
+                          sortBy="#{signal.signalType.signalType}"
+                          filterBy="#{signal.signalType.signalType}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{signal.signalType.signalType}"/>     
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </h:body>
+</html>
+

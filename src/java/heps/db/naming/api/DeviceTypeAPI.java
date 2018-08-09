@@ -5,13 +5,10 @@
  */
 package heps.db.naming.api;
 
+import heps.db.naming.comman.tools.EmProvider;
 import heps.db.naming.entity.DeviceType;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
 /**
@@ -20,11 +17,12 @@ import javax.persistence.Query;
  */
 public class DeviceTypeAPI {
 
-    @PersistenceUnit
+   /* @PersistenceUnit
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("accNamingPU");
     static EntityManager em = emf.createEntityManager();
 
-    @PersistenceContext
+    @PersistenceContext*/
+    public static EntityManager em = EmProvider.getInstance().getEntityManagerFactory().createEntityManager();
 
     public DeviceType findByDeviceType(String device_type) {
         Query q;
@@ -61,4 +59,9 @@ public class DeviceTypeAPI {
 
     }
 
+     public List<DeviceType> getAllDeviceType(){
+        Query q;
+        q=em.createNamedQuery("DeviceType.findAll");
+        return q.getResultList();
+    }
 }

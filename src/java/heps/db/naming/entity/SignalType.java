@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Paul
+ * @author Lvhuihui
  */
 @Entity
 @Table(name = "signal_type")
@@ -48,7 +48,7 @@ public class SignalType implements Serializable {
     @Column(name = "description")
     private String description;
     @OneToMany(mappedBy = "signalType")
-    private List<Signal> signalList;
+    private List<TSignal> tSignalList;
 
     public SignalType() {
     }
@@ -82,12 +82,12 @@ public class SignalType implements Serializable {
     }
 
     @XmlTransient
-    public List<Signal> getSignalList() {
-        return signalList;
+    public List<TSignal> getTSignalList() {
+        return tSignalList;
     }
 
-    public void setSignalList(List<Signal> signalList) {
-        this.signalList = signalList;
+    public void setTSignalList(List<TSignal> tSignalList) {
+        this.tSignalList = tSignalList;
     }
 
     @Override
